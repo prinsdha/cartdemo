@@ -13,8 +13,6 @@ class HomeController extends GetxController {
 
   ItemsModel? items;
 
-  Set<String> seen = {};
-
   List<TableMenuList> get categories => items!.tableMenuList;
   late StreamSubscription<AppEvent> _appEventSubscription;
 
@@ -42,17 +40,21 @@ class HomeController extends GetxController {
       event.maybeWhen(
           orElse: () {},
           clearCart: () {
-            for (var element in items!.tableMenuList.first.categoryDishes) {
-              element.count = 0;
+            for (var element in categories) {
+              for (var e in element.categoryDishes) {
+                e.count = 0;
+              }
             }
             update();
           },
-          cartUpdate: (dish) {
-            for (var element in items!.tableMenuList.first.categoryDishes) {
-              if (element.dishId == dish.dishId) {
-                element.count = dish.count;
-                update(["quantityUpdate"]);
-                break;
+          cartUpdate: (dish, count) {
+            for (var element in categories) {
+              for (var e in element.categoryDishes) {
+                if (e.dishId == dish.dishId) {
+                  e.count = count;
+                  update();
+                  break;
+                }
               }
             }
           });

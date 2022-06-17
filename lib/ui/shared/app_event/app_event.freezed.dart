@@ -19,19 +19,19 @@ mixin _$AppEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() clearCart,
-    required TResult Function(CategoryDish categoryDish) cartUpdate,
+    required TResult Function(CategoryDish categoryDish, int count) cartUpdate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? clearCart,
-    TResult Function(CategoryDish categoryDish)? cartUpdate,
+    TResult Function(CategoryDish categoryDish, int count)? cartUpdate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? clearCart,
-    TResult Function(CategoryDish categoryDish)? cartUpdate,
+    TResult Function(CategoryDish categoryDish, int count)? cartUpdate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,7 +112,7 @@ class _$ClearCart implements ClearCart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() clearCart,
-    required TResult Function(CategoryDish categoryDish) cartUpdate,
+    required TResult Function(CategoryDish categoryDish, int count) cartUpdate,
   }) {
     return clearCart();
   }
@@ -121,7 +121,7 @@ class _$ClearCart implements ClearCart {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? clearCart,
-    TResult Function(CategoryDish categoryDish)? cartUpdate,
+    TResult Function(CategoryDish categoryDish, int count)? cartUpdate,
   }) {
     return clearCart?.call();
   }
@@ -130,7 +130,7 @@ class _$ClearCart implements ClearCart {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? clearCart,
-    TResult Function(CategoryDish categoryDish)? cartUpdate,
+    TResult Function(CategoryDish categoryDish, int count)? cartUpdate,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -180,7 +180,7 @@ abstract class _$$CartUpdateCopyWith<$Res> {
   factory _$$CartUpdateCopyWith(
           _$CartUpdate value, $Res Function(_$CartUpdate) then) =
       __$$CartUpdateCopyWithImpl<$Res>;
-  $Res call({CategoryDish categoryDish});
+  $Res call({CategoryDish categoryDish, int count});
 }
 
 /// @nodoc
@@ -196,12 +196,17 @@ class __$$CartUpdateCopyWithImpl<$Res> extends _$AppEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? categoryDish = freezed,
+    Object? count = freezed,
   }) {
     return _then(_$CartUpdate(
       categoryDish: categoryDish == freezed
           ? _value.categoryDish
           : categoryDish // ignore: cast_nullable_to_non_nullable
               as CategoryDish,
+      count: count == freezed
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -209,14 +214,16 @@ class __$$CartUpdateCopyWithImpl<$Res> extends _$AppEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CartUpdate implements CartUpdate {
-  const _$CartUpdate({required this.categoryDish});
+  const _$CartUpdate({required this.categoryDish, required this.count});
 
   @override
   final CategoryDish categoryDish;
+  @override
+  final int count;
 
   @override
   String toString() {
-    return 'AppEvent.cartUpdate(categoryDish: $categoryDish)';
+    return 'AppEvent.cartUpdate(categoryDish: $categoryDish, count: $count)';
   }
 
   @override
@@ -225,12 +232,15 @@ class _$CartUpdate implements CartUpdate {
         (other.runtimeType == runtimeType &&
             other is _$CartUpdate &&
             const DeepCollectionEquality()
-                .equals(other.categoryDish, categoryDish));
+                .equals(other.categoryDish, categoryDish) &&
+            const DeepCollectionEquality().equals(other.count, count));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(categoryDish));
+      runtimeType,
+      const DeepCollectionEquality().hash(categoryDish),
+      const DeepCollectionEquality().hash(count));
 
   @JsonKey(ignore: true)
   @override
@@ -241,29 +251,29 @@ class _$CartUpdate implements CartUpdate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() clearCart,
-    required TResult Function(CategoryDish categoryDish) cartUpdate,
+    required TResult Function(CategoryDish categoryDish, int count) cartUpdate,
   }) {
-    return cartUpdate(categoryDish);
+    return cartUpdate(categoryDish, count);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? clearCart,
-    TResult Function(CategoryDish categoryDish)? cartUpdate,
+    TResult Function(CategoryDish categoryDish, int count)? cartUpdate,
   }) {
-    return cartUpdate?.call(categoryDish);
+    return cartUpdate?.call(categoryDish, count);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? clearCart,
-    TResult Function(CategoryDish categoryDish)? cartUpdate,
+    TResult Function(CategoryDish categoryDish, int count)? cartUpdate,
     required TResult orElse(),
   }) {
     if (cartUpdate != null) {
-      return cartUpdate(categoryDish);
+      return cartUpdate(categoryDish, count);
     }
     return orElse();
   }
@@ -301,10 +311,12 @@ class _$CartUpdate implements CartUpdate {
 }
 
 abstract class CartUpdate implements AppEvent {
-  const factory CartUpdate({required final CategoryDish categoryDish}) =
-      _$CartUpdate;
+  const factory CartUpdate(
+      {required final CategoryDish categoryDish,
+      required final int count}) = _$CartUpdate;
 
   CategoryDish get categoryDish => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$CartUpdateCopyWith<_$CartUpdate> get copyWith =>
       throw _privateConstructorUsedError;

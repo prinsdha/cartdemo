@@ -7,6 +7,6 @@ part 'app_event.freezed.dart';
 class AppEvent with _$AppEvent {
   const factory AppEvent.clearCart() = ClearCart;
 
-  const factory AppEvent.cartUpdate({required CategoryDish categoryDish}) =
-      CartUpdate;
+  const factory AppEvent.cartUpdate(
+      {required CategoryDish categoryDish, required int count}) = CartUpdate;
 }

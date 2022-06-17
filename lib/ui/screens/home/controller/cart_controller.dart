@@ -11,9 +11,9 @@ class CartController extends GetxController {
 
   late StreamSubscription<AppEvent> _appEventSubscription;
 
-  void addToCart(CategoryDish categoryDish) {
+  void addToCart(CategoryDish categoryDish, int count) {
     if (cartItems.containsKey(categoryDish.dishId)) {
-      cartItems.update(categoryDish.dishId, (value) => categoryDish);
+      cartItems[categoryDish.dishId]!.count = count;
     } else {
       cartItems.putIfAbsent(categoryDish.dishId, () => categoryDish);
     }
@@ -57,11 +57,11 @@ class CartController extends GetxController {
     _appEventSubscription = appController.appEventStream.listen((event) {
       event.maybeWhen(
           orElse: () {},
-          cartUpdate: (dish) {
+          cartUpdate: (dish, count) {
             if (dish.count == 0) {
               cartItems.remove(dish.dishId);
             } else {
-              addToCart(dish);
+              addToCart(dish, count);
             }
           });
 

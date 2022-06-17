@@ -263,52 +263,47 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             const SizedBox(
                               height: 10,
                             ),
-                            GetBuilder(
-                              id: "quantityUpdate",
-                              builder: (HomeController controller) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(50)),
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      GestureDetector(
-                                          onTap: () {
-                                            if (dish.count != 0) {
-                                              dish.count--;
-                                              appController.addAppEvent(
-                                                  AppEvent.cartUpdate(
-                                                      categoryDish: dish));
-                                            }
-                                          },
-                                          child: const Icon(
-                                            Icons.remove,
-                                            color: Colors.white,
-                                          )),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 6.0),
-                                        child: Text(
-                                          dish.count.toString(),
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                          onTap: () {
-                                            dish.count++;
-                                            appController.addAppEvent(
-                                                AppEvent.cartUpdate(
-                                                    categoryDish: dish));
-                                          },
-                                          child: const Icon(Icons.add,
-                                              color: Colors.white)),
-                                    ],
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(50)),
+                              padding: const EdgeInsets.all(4.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        if (dish.count != 0) {
+                                          appController.addAppEvent(
+                                              AppEvent.cartUpdate(
+                                                  categoryDish: dish,
+                                                  count: dish.count - 1));
+                                        }
+                                      },
+                                      child: const Icon(
+                                        Icons.remove,
+                                        color: Colors.white,
+                                      )),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6.0),
+                                    child: Text(
+                                      dish.count.toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
                                   ),
-                                );
-                              },
+                                  GestureDetector(
+                                      onTap: () {
+                                        appController.addAppEvent(
+                                            AppEvent.cartUpdate(
+                                                categoryDish: dish,
+                                                count: dish.count + 1));
+                                      },
+                                      child: const Icon(Icons.add,
+                                          color: Colors.white)),
+                                ],
+                              ),
                             ),
                             const SizedBox(
                               height: 10,

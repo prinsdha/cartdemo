@@ -173,10 +173,10 @@ class _CartScreenState extends State<CartScreen> {
                                 GestureDetector(
                                     onTap: () {
                                       if (dish.count != 0) {
-                                        dish.count--;
                                         appController.addAppEvent(
                                             AppEvent.cartUpdate(
-                                                categoryDish: dish));
+                                                categoryDish: dish,
+                                                count: dish.count - 1));
                                       }
                                     },
                                     child: const Icon(
@@ -193,10 +193,10 @@ class _CartScreenState extends State<CartScreen> {
                                 ),
                                 GestureDetector(
                                     onTap: () {
-                                      dish.count++;
                                       appController.addAppEvent(
                                           AppEvent.cartUpdate(
-                                              categoryDish: dish));
+                                              categoryDish: dish,
+                                              count: dish.count + 1));
                                     },
                                     child: const Icon(Icons.add,
                                         color: Colors.white)),
